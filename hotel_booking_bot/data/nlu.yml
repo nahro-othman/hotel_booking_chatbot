@@ -1,0 +1,124 @@
+version: "3.1"
+nlu:
+  - intent: greet
+    examples: |
+      - hi
+      - hello
+      - hey
+      - good morning
+      - good evening
+      - hey there
+      - hi there
+      - hello bot
+
+  - intent: goodbye
+    examples: |
+      - bye
+      - goodbye
+      - see you
+      - talk to you later
+      - thanks, bye
+      - bye bye
+
+  - intent: affirm
+    examples: |
+      - yes
+      - yup
+      - sure
+      - indeed
+      - correct
+      - confirm
+
+  - intent: deny
+    examples: |
+      - no
+      - nope
+      - not really
+      - don't confirm
+      - cancel
+
+  - intent: book_room
+    examples: |
+      - I want to book a room
+      - book a hotel room
+      - help me book a room
+      - I'd like to make a booking
+      - need a room reservation
+
+  - intent: provide_name
+    examples: |
+      - my name is [Nahro](name)
+      - I'm [Alice Johnson](name)
+      - it's [Bob](name)
+      - [Charlie Brown](name)
+      - I am [Diana](name)
+      - call me [Evan Smith](name)
+
+  - intent: provide_dates
+    examples: |
+      - check in on [10th November](checkin_date)
+      - check out on [12th November](checkout_date)
+      - from [10 Nov](checkin_date) to [12 Nov](checkout_date)
+      - arriving [November 10](checkin_date)
+      - leaving [November 12](checkout_date)
+      - [10/11](checkin_date) to [12/11](checkout_date)
+
+  - intent: provide_guests
+    examples: |
+      - [2](guests)
+      - [two](guests)
+      - there will be [3](guests) people
+      - just [1](guests) guest
+      - we are [four](guests)
+
+  - intent: provide_room_type
+    examples: |
+      - [single](room_type)
+      - [double](room_type)
+      - a [single](room_type) room
+      - a [double](room_type) room
+
+  - intent: provide_breakfast
+    examples: |
+      - [yes](breakfast) breakfast
+      - [no](breakfast) breakfast
+      - breakfast [yes](breakfast)
+      - breakfast [no](breakfast)
+      - include breakfast [yes](breakfast)
+      - no breakfast [no](breakfast)
+      - [y](breakfast)
+      - [n](breakfast)
+      - [yeah](breakfast)
+      - [nope](breakfast)
+
+  - intent: provide_payment
+    examples: |
+      - pay by [credit card](payment_method)
+      - [cash](payment_method)
+      - I'll use [credit card](payment_method)
+      - payment [cash](payment_method)
+      - [card](payment_method)
+      - [visa](payment_method)
+      - [mastercard](payment_method)
+      - pay with [cash](payment_method)
+
+  - synonym: credit card
+    examples: |
+      - card
+      - visa
+      - mastercard
+      - credit
+
+  - synonym: single
+    examples: |
+      - single room
+      - one bed
+      - 1 bed
+
+  - synonym: double
+    examples: |
+      - double room
+      - two beds
+      - 2 beds
+
+

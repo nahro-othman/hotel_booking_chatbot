@@ -1,0 +1,69 @@
+version: "3.1"
+rules:
+  - rule: greet response
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - action: booking_form
+      - active_loop: booking_form
+
+  - rule: say goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  # Move to payment only if the bot just asked about breakfast
+  - rule: ask payment after breakfast (explicit value)
+    steps:
+      - action: utter_ask_breakfast
+      - intent: provide_breakfast
+      - action: utter_ask_payment_method
+
+  - rule: ask payment after breakfast (affirm)
+    steps:
+      - action: utter_ask_breakfast
+      - intent: affirm
+      - action: utter_ask_payment_method
+
+  - rule: ask payment after breakfast (deny)
+    steps:
+      - action: utter_ask_breakfast
+      - intent: deny
+      - action: utter_ask_payment_method
+
+  - rule: ask payment when breakfast slot set to yes
+    steps:
+      - slot_was_set:
+          - breakfast: "yes"
+      - action: utter_ask_payment_method
+
+  - rule: ask payment when breakfast slot set to no
+    steps:
+      - slot_was_set:
+          - breakfast: "no"
+      - action: utter_ask_payment_method
+
+  - rule: activate booking form
+    steps:
+      - intent: book_room
+      - action: booking_form
+      - active_loop: booking_form
+
+  - rule: submit booking form
+    condition:
+      - active_loop: booking_form
+    steps:
+      - action: booking_form
+      - active_loop: null
+      - action: utter_summary
+      - action: utter_ask_confirm
+
+  - rule: confirm and store booking
+    steps:
+      - intent: affirm
+      - action: action_store_booking
+
+  - rule: deny booking after summary
+    steps:
+      - intent: deny
+      - action: utter_goodbye

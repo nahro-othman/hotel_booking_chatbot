@@ -1,0 +1,142 @@
+version: "3.1"
+
+intents:
+  - greet
+  - book_room
+  - provide_name
+  - provide_dates
+  - provide_guests
+  - provide_room_type
+  - provide_breakfast
+  - provide_payment
+  - affirm
+  - deny
+  - goodbye
+
+entities:
+  - name
+  - checkin_date
+  - checkout_date
+  - guests
+  - room_type
+  - breakfast
+  - payment_method
+
+slots:
+  name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: name
+      - type: from_text
+        conditions:
+          - active_loop: booking_form
+            requested_slot: name
+  checkin_date:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: checkin_date
+      - type: from_text
+        conditions:
+          - active_loop: booking_form
+            requested_slot: checkin_date
+  checkout_date:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: checkout_date
+      - type: from_text
+        conditions:
+          - active_loop: booking_form
+            requested_slot: checkout_date
+  guests:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: guests
+      - type: from_text
+        conditions:
+          - active_loop: booking_form
+            requested_slot: guests
+  room_type:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: room_type
+      - type: from_text
+        conditions:
+          - active_loop: booking_form
+            requested_slot: room_type
+  breakfast:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: breakfast
+      - type: from_intent
+        intent: affirm
+        value: "yes"
+      - type: from_intent
+        intent: deny
+        value: "no"
+      - type: from_text
+        conditions:
+          - active_loop: booking_form
+            requested_slot: breakfast
+  payment_method:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: payment_method
+      - type: from_text
+        conditions:
+          - active_loop: booking_form
+            requested_slot: payment_method
+
+responses:
+  utter_greet:
+    - text: "Hello! I can help you book a hotel room. What’s your name?"
+  utter_ask_name:
+    - text: "What’s your name?"
+  utter_ask_checkin_date:
+    - text: "What’s your check-in date?"
+  utter_ask_checkout_date:
+    - text: "And your check-out date?"
+  utter_ask_guests:
+    - text: "How many guests will stay?"
+  utter_ask_room_type:
+    - text: "What room type would you like? Single or double?"
+  utter_ask_breakfast:
+    - text: "Do you want breakfast included?"
+  utter_ask_payment_method:
+    - text: "How would you like to pay? Credit card or cash?"
+  utter_ack_name:
+    - text: "Nice to meet you, {name}!"
+  utter_summary:
+    - text: "Here’s your summary: {name}, {room_type} room, {guests} guests, from {checkin_date} to {checkout_date}, breakfast: {breakfast}, payment by {payment_method}. Confirm?"
+  utter_ask_confirm:
+    - text: "Please confirm the booking. Is this correct?"
+  utter_goodbye:
+    - text: "Goodbye!"
+
+actions:
+  - action_store_booking
+  - validate_booking_form
+
+forms:
+  booking_form:
+    required_slots:
+      - name
+      - checkin_date
+      - checkout_date
+      - guests
+      - room_type
+      - breakfast
+      - payment_method

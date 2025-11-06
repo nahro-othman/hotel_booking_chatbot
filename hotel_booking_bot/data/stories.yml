@@ -1,0 +1,61 @@
+version: "3.1"
+stories:
+  - story: happy path booking
+    steps:
+      - intent: greet
+      - action: utter_greet
+
+      - intent: provide_name
+        entities:
+          - name: Nahro
+      - slot_was_set:
+          - name: Nahro
+      - action: utter_ack_name
+      - action: utter_ask_checkin_date
+
+      - intent: provide_dates
+        entities:
+          - checkin_date: 10th November
+      - slot_was_set:
+          - checkin_date: 10th November
+      - action: utter_ask_checkout_date
+
+      - intent: provide_dates
+        entities:
+          - checkout_date: 12th November
+      - slot_was_set:
+          - checkout_date: 12th November
+      - action: utter_ask_guests
+
+      - intent: provide_guests
+        entities:
+          - guests: 2
+      - slot_was_set:
+          - guests: 2
+      - action: utter_ask_room_type
+
+      - intent: provide_room_type
+        entities:
+          - room_type: double
+      - slot_was_set:
+          - room_type: double
+      - action: utter_ask_breakfast
+
+      - intent: provide_breakfast
+        entities:
+          - breakfast: yes
+      - slot_was_set:
+          - breakfast: yes
+      - action: utter_ask_payment_method
+
+      - intent: provide_payment
+        entities:
+          - payment_method: credit card
+      - slot_was_set:
+          - payment_method: credit card
+      - action: utter_summary
+
+      - intent: affirm
+      - action: action_store_booking
+
+
