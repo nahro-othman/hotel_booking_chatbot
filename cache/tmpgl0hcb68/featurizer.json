@@ -1,0 +1,75 @@
+{
+  "type": "MaxHistoryTrackerFeaturizer",
+  "state_featurizer": {
+    "action_texts": [],
+    "entity_tag_specs": [],
+    "feature_states": {
+      "intent": {
+        "affirm": 0,
+        "back": 1,
+        "book_room": 2,
+        "deny": 3,
+        "goodbye": 4,
+        "greet": 5,
+        "nlu_fallback": 6,
+        "out_of_scope": 7,
+        "provide_breakfast": 8,
+        "provide_dates": 9,
+        "provide_guests": 10,
+        "provide_name": 11,
+        "provide_payment": 12,
+        "provide_room_type": 13,
+        "restart": 14,
+        "session_start": 15
+      },
+      "action_name": {
+        "action_listen": 0,
+        "action_restart": 1,
+        "action_session_start": 2,
+        "action_default_fallback": 3,
+        "action_deactivate_loop": 4,
+        "action_revert_fallback_events": 5,
+        "action_default_ask_affirmation": 6,
+        "action_default_ask_rephrase": 7,
+        "action_two_stage_fallback": 8,
+        "action_unlikely_intent": 9,
+        "action_back": 10,
+        "...": 11,
+        "action_extract_slots": 12,
+        "action_store_booking": 13,
+        "utter_ack_name": 14,
+        "utter_ask_breakfast": 15,
+        "utter_ask_checkin_date": 16,
+        "utter_ask_checkout_date": 17,
+        "utter_ask_guests": 18,
+        "utter_ask_name": 19,
+        "utter_ask_payment_method": 20,
+        "utter_ask_room_type": 21,
+        "utter_goodbye": 22,
+        "utter_greet": 23,
+        "utter_summary": 24
+      },
+      "entities": {
+        "breakfast": 0,
+        "checkin_date": 1,
+        "checkout_date": 2,
+        "guests": 3,
+        "name": 4,
+        "payment_method": 5,
+        "room_type": 6
+      },
+      "slots": {
+        "name_0": 0,
+        "checkin_date_0": 1,
+        "checkout_date_0": 2,
+        "guests_0": 3,
+        "room_type_0": 4,
+        "breakfast_0": 5,
+        "payment_method_0": 6
+      },
+      "active_loop": {}
+    }
+  },
+  "remove_duplicates": true,
+  "max_history": null
+}
