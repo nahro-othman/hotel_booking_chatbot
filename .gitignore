@@ -42,3 +42,11 @@ Thumbs.db
 
 # Process IDs
 .pids
+
+# Web UI (removed)
+web_ui/
+start_all.sh
+stop_all.sh
+
+# Old subdirectory
+hotel_booking_bot/

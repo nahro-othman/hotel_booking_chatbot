@@ -21,8 +21,6 @@ After collecting all information, the bot confirms the booking summary and saves
 - **Framework**: Rasa 3.6.20
 - **Python**: 3.10+
 - **NLP**: Rasa NLU (default pipeline)
-- **Web Interface**: Flask 3.0.0
-- **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
 - **Storage**: Local file system (`bookings.txt`)
 
 ## 📁 Project Structure
@@ -36,17 +34,14 @@ hotel_booking_chatbot/
 │   ├── nlu.yml            # Training data for NLU
 │   ├── rules.yml          # Conversation rules
 │   └── stories.yml        # Conversation flows
-├── static/
-│   ├── style.css          # Web UI styles
-│   └── script.js          # Web UI JavaScript
-├── templates/
-│   └── index.html         # Web UI HTML template
-├── app.py                 # Flask web application
+├── models/                # Trained models (generated)
 ├── config.yml             # Rasa NLU pipeline and policy configuration
 ├── domain.yml             # Intents, entities, slots, responses, and actions
 ├── endpoints.yml          # Action server endpoint configuration
 ├── credentials.yml        # Channel credentials
 ├── requirements.txt       # Python dependencies
+├── start_all.sh           # Script to start all components
+├── stop_all.sh            # Script to stop all components
 └── README.md             # This file
 ```
 
@@ -82,41 +77,33 @@ This will create a trained model in the `models/` directory.
 
 ## 🎮 Running the Chatbot
 
-### Option 1: Web Interface (Recommended) 🌐
+### Option 1: Quick Start (Recommended) 🚀
 
-The chatbot includes a beautiful, modern web interface built with Flask!
-
-You need to run **THREE** terminals simultaneously:
-
-**Terminal 1 - Start the Rasa Server:**
+Use the provided script to start all components automatically:
 
 ```bash
-rasa run --enable-api --cors "*"
+./start_all.sh
 ```
 
-**Terminal 2 - Start the Action Server:**
+This will:
+- Auto-train the model if needed
+- Start the Rasa server
+- Start the Action server
+- Wait for everything to be ready
+
+Then interact with the bot:
 
 ```bash
-rasa run actions
+rasa shell
 ```
 
-**Terminal 3 - Start the Flask Web App:**
+To stop all components:
 
 ```bash
-python app.py
+./stop_all.sh
 ```
 
-Then open your browser and navigate to:
-
-```
-http://localhost:5001
-```
-
-**Note:** We use port 5001 because port 5000 is often used by macOS AirPlay Receiver.
-
-You'll see a modern chat interface where you can interact with the bot! 🎉
-
-### Option 2: Terminal Interface (rasa shell)
+### Option 2: Manual Start
 
 You need to run TWO terminals simultaneously:
 
