@@ -1,26 +1,44 @@
-# OS
-.DS_Store
+# Rasa
+models/
+.rasa/
 
 # Python
 __pycache__/
 *.py[cod]
-*.egg-info/
-.pytest_cache/
-
-# Virtual envs
-.venv/
+*$py.class
+*.so
+.Python
 venv/
 env/
+ENV/
+.venv
 
-# Editors/IDE
+# Rasa specific
+results/
+*.tar.gz
+*.db
+*.db-shm
+*.db-wal
+
+# Training logs
+training_logs/
+
+# Bookings (comment out if you want to track bookings)
+# bookings.txt
+
+# IDE
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
 
-# Rasa artifacts
-models/
-.rasa/
+# OS
+.DS_Store
+Thumbs.db
 
-# Local data/output
-bookings.txt
+# Logs
+*.log
 
-
+# Process IDs
+.pids

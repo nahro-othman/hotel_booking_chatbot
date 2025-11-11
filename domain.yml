@@ -2,13 +2,13 @@ version: "3.1"
 
 intents:
   - greet
-  - book_room
   - provide_name
-  - provide_dates
-  - provide_guests
+  - provide_checkin_date
+  - provide_checkout_date
+  - provide_num_guests
   - provide_room_type
   - provide_breakfast
-  - provide_payment
+  - provide_payment_method
   - affirm
   - deny
   - goodbye
@@ -17,25 +17,26 @@ entities:
   - name
   - checkin_date
   - checkout_date
-  - guests
+  - num_guests
   - room_type
   - breakfast
   - payment_method
 
 slots:
-  name:
+  guest_name:
     type: text
-    influence_conversation: true
+    influence_conversation: false
     mappings:
       - type: from_entity
         entity: name
       - type: from_text
         conditions:
           - active_loop: booking_form
-            requested_slot: name
+            requested_slot: guest_name
+
   checkin_date:
     type: text
-    influence_conversation: true
+    influence_conversation: false
     mappings:
       - type: from_entity
         entity: checkin_date
@@ -43,9 +44,10 @@ slots:
         conditions:
           - active_loop: booking_form
             requested_slot: checkin_date
+
   checkout_date:
     type: text
-    influence_conversation: true
+    influence_conversation: false
     mappings:
       - type: from_entity
         entity: checkout_date
@@ -53,19 +55,21 @@ slots:
         conditions:
           - active_loop: booking_form
             requested_slot: checkout_date
-  guests:
+
+  num_guests:
     type: text
-    influence_conversation: true
+    influence_conversation: false
     mappings:
       - type: from_entity
-        entity: guests
+        entity: num_guests
       - type: from_text
         conditions:
           - active_loop: booking_form
-            requested_slot: guests
+            requested_slot: num_guests
+
   room_type:
     type: text
-    influence_conversation: true
+    influence_conversation: false
     mappings:
       - type: from_entity
         entity: room_type
@@ -73,25 +77,21 @@ slots:
         conditions:
           - active_loop: booking_form
             requested_slot: room_type
+
   breakfast:
     type: text
-    influence_conversation: true
+    influence_conversation: false
     mappings:
       - type: from_entity
         entity: breakfast
-      - type: from_intent
-        intent: affirm
-        value: "yes"
-      - type: from_intent
-        intent: deny
-        value: "no"
       - type: from_text
         conditions:
           - active_loop: booking_form
             requested_slot: breakfast
+
   payment_method:
     type: text
-    influence_conversation: true
+    influence_conversation: false
     mappings:
       - type: from_entity
         entity: payment_method
@@ -102,41 +102,53 @@ slots:
 
 responses:
   utter_greet:
-    - text: "Hello! I can help you book a hotel room. What’s your name?"
-  utter_ask_name:
-    - text: "What’s your name?"
+    - text: "Hello! I can help you book a hotel room. What's your name?"
+
+  utter_ask_guest_name:
+    - text: "What's your name?"
+
   utter_ask_checkin_date:
-    - text: "What’s your check-in date?"
+    - text: "Nice to meet you, {guest_name}! What's your check-in date?"
+
   utter_ask_checkout_date:
     - text: "And your check-out date?"
-  utter_ask_guests:
+
+  utter_ask_num_guests:
     - text: "How many guests will stay?"
+
   utter_ask_room_type:
     - text: "What room type would you like? Single or double?"
+
   utter_ask_breakfast:
     - text: "Do you want breakfast included?"
+
   utter_ask_payment_method:
     - text: "How would you like to pay? Credit card or cash?"
-  utter_ack_name:
-    - text: "Nice to meet you, {name}!"
-  utter_summary:
-    - text: "Here’s your summary: {name}, {room_type} room, {guests} guests, from {checkin_date} to {checkout_date}, breakfast: {breakfast}, payment by {payment_method}. Confirm?"
-  utter_ask_confirm:
-    - text: "Please confirm the booking. Is this correct?"
-  utter_goodbye:
-    - text: "Goodbye!"
 
-actions:
-  - action_store_booking
-  - validate_booking_form
+  utter_confirm_booking:
+    - text: "Great! Your booking is confirmed. Thank you for choosing our hotel."
+
+  utter_booking_cancelled:
+    - text: "No problem! Let's start over. What's your name?"
+
+  utter_goodbye:
+    - text: "Goodbye! Have a great day!"
 
 forms:
   booking_form:
     required_slots:
-      - name
+      - guest_name
       - checkin_date
       - checkout_date
-      - guests
+      - num_guests
       - room_type
       - breakfast
       - payment_method
+
+actions:
+  - action_show_booking_summary
+  - action_confirm_booking
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

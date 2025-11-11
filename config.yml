@@ -12,13 +12,23 @@ pipeline:
   max_ngram: 4
 - name: DIETClassifier
   epochs: 100
+  constrain_similarities: true
 - name: EntitySynonymMapper
 - name: ResponseSelector
-  epochs: 50
+  epochs: 100
+  constrain_similarities: true
+- name: FallbackClassifier
+  threshold: 0.3
+  ambiguity_threshold: 0.1
 
 policies:
-- name: RulePolicy
 - name: MemoizationPolicy
-- name: TEDPolicy
+- name: RulePolicy
+- name: UnexpecTEDIntentPolicy
+  max_history: 5
   epochs: 100
-assistant_id: 20251106-123442-symmetric-cod
+- name: TEDPolicy
+  max_history: 5
+  epochs: 100
+  constrain_similarities: true
+assistant_id: 20251111-102359-flat-anode
