@@ -10,3 +10,15 @@ Room Type: s
 Breakfast: s
 Payment Method: s
 ============================================================
+
+============================================================
+BOOKING CONFIRMATION - 2025-11-11 21:18:49
+============================================================
+Guest Name: Nahro
+Check-in Date: 10 october
+Check-out Date: 15/10/2025
+Number of Guests: 10
+Room Type: Single
+Breakfast: Yes
+Payment Method: Cash
+============================================================

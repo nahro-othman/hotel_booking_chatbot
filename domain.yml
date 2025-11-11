@@ -148,6 +148,7 @@ forms:
 actions:
   - action_show_booking_summary
   - action_confirm_booking
+  - validate_booking_form
 
 session_config:
   session_expiration_time: 60
