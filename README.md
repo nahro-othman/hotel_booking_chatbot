@@ -40,9 +40,10 @@ hotel_booking_chatbot/
 ├── endpoints.yml          # Action server endpoint configuration
 ├── credentials.yml        # Channel credentials
 ├── requirements.txt       # Python dependencies
-├── start_all.sh           # Script to start all components
-├── stop_all.sh            # Script to stop all components
-└── README.md             # This file
+├── setup.sh               # Initial setup script
+├── run.sh                 # Run the chatbot
+├── stop.sh                # Stop all components
+└── README.md              # This file
 ```
 
 ## 🚀 Installation
@@ -79,29 +80,23 @@ This will create a trained model in the `models/` directory.
 
 ### Option 1: Quick Start (Recommended) 🚀
 
-Use the provided script to start all components automatically:
-
 ```bash
-./start_all.sh
+# First time only - setup and train
+./setup.sh
+
+# Run the chatbot
+./run.sh
+
+# To stop (in another terminal if needed)
+./stop.sh
 ```
 
-This will:
-- Auto-train the model if needed
-- Start the Rasa server
-- Start the Action server
-- Wait for everything to be ready
+The `run.sh` script will:
+- Activate virtual environment
+- Check if model is trained
+- Start the action server automatically
+- Launch the Rasa shell for you to chat
 
-Then interact with the bot:
-
-```bash
-rasa shell
-```
-
-To stop all components:
-
-```bash
-./stop_all.sh
-```
 
 ### Option 2: Manual Start
 

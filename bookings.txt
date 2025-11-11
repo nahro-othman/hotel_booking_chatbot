@@ -1,0 +1,12 @@
+
+============================================================
+BOOKING CONFIRMATION - 2025-11-11 12:07:34
+============================================================
+Guest Name: Nahro
+Check-in Date: nf
+Check-out Date: ef
+Number of Guests: 2
+Room Type: s
+Breakfast: s
+Payment Method: s
+============================================================
