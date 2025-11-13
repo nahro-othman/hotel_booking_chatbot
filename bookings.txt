@@ -22,3 +22,15 @@ Room Type: Single
 Breakfast: Yes
 Payment Method: Cash
 ============================================================
+
+============================================================
+BOOKING CONFIRMATION - 2025-11-12 15:54:08
+============================================================
+Guest Name: sa
+Check-in Date: 12th november
+Check-out Date: 12th November
+Number of Guests: 10
+Room Type: Double
+Breakfast: Yes
+Payment Method: Cash
+============================================================
