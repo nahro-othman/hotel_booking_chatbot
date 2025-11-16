@@ -70,3 +70,15 @@ Room Type: Single
 Breakfast: No
 Payment Method: Paypal
 ============================================================
+
+============================================================
+BOOKING CONFIRMATION - 2025-11-16 14:04:33
+============================================================
+Guest Name: Nahro
+Check-in Date: 10th july
+Check-out Date: 13th july
+Number of Guests: 10
+Room Type: Deluxe
+Breakfast: No
+Payment Method: Cash
+============================================================

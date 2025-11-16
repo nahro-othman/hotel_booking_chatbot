@@ -35,6 +35,61 @@ After collecting all information, the bot confirms the booking summary and saves
 - **Python**: 3.10+
 - **NLP**: Rasa NLU (default pipeline)
 - **Storage**: Local file system (`bookings.txt`)
+- **API**: Flask 2.3.2 with CORS support
+
+## 🌐 Web Frontend + REST API
+
+This project includes a **beautiful web interface** and a **Flask REST API** for easy integration!
+
+### Quick Start with Web Interface
+
+1. **Start Rasa (Terminal 1):**
+   ```bash
+   ./run.sh
+   ```
+
+2. **Start Web Server (Terminal 2):**
+   ```bash
+   cd flask_api
+   ./run_api.sh
+   ```
+
+3. **Open in Browser:**
+   🌐 **http://localhost:5001**
+
+**That's it!** Start chatting in your browser! 🎉
+
+> **Note:** Port 5001 is used because macOS reserves port 5000 for AirPlay.
+
+For detailed instructions, see **[QUICKSTART_WEB.md](QUICKSTART_WEB.md)**
+
+### API Endpoints
+
+- `POST /chat` - Send messages to the chatbot
+- `POST /session/new` - Create a new conversation session
+- `POST /session/reset` - Reset a conversation
+- `GET /bookings` - Get all bookings
+- `GET /health` - Check API and bot status
+- `GET /docs` - Complete API documentation
+
+### Integration Example
+
+```javascript
+// Send a message to the bot
+const response = await fetch('http://localhost:5000/chat', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    message: "I want to book a room",
+    sender: "user123"
+  })
+});
+
+const data = await response.json();
+console.log(data.responses); // Bot's replies
+```
+
+📚 **Full API documentation:** See [API_README.md](API_README.md)
 
 ## 📁 Project Structure
 
@@ -53,9 +108,14 @@ hotel_booking_chatbot/
 ├── endpoints.yml          # Action server endpoint configuration
 ├── credentials.yml        # Channel credentials
 ├── requirements.txt       # Python dependencies
+├── api.py                 # Flask REST API server
+├── frontend_example.html  # Sample frontend integration
 ├── setup.sh               # Initial setup script
 ├── run.sh                 # Run the chatbot
+├── start_api.sh           # Start the REST API server
+├── test_api.sh            # Test API endpoints
 ├── stop.sh                # Stop all components
+├── API_README.md          # API documentation
 └── README.md              # This file
 ```
 

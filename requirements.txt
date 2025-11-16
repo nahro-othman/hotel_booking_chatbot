@@ -1,2 +1,5 @@
 rasa==3.6.20
 rasa-sdk==3.6.2
+flask==2.3.2
+flask-cors==4.0.0
+requests==2.31.0
