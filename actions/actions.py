@@ -19,21 +19,36 @@ class ActionShowBookingSummary(Action):
         
         # Get all slot values
         guest_name = tracker.get_slot("guest_name")
+        email = tracker.get_slot("email")
+        phone = tracker.get_slot("phone")
         checkin_date = tracker.get_slot("checkin_date")
         checkout_date = tracker.get_slot("checkout_date")
         num_guests = tracker.get_slot("num_guests")
         room_type = tracker.get_slot("room_type")
+        special_requests = tracker.get_slot("special_requests")
         breakfast = tracker.get_slot("breakfast")
         payment_method = tracker.get_slot("payment_method")
         
         # Format breakfast text
         breakfast_text = "breakfast included" if breakfast and breakfast.lower() in ["yes", "y", "yeah", "yep", "sure"] else "no breakfast"
         
+        # Format special requests
+        requests_text = f", special requests: {special_requests}" if special_requests and special_requests.lower() != "none" else ""
+        
         # Create summary message
         summary = (
-            f"Here's your summary: {guest_name}, {room_type} room, {num_guests} guests, "
-            f"from {checkin_date} to {checkout_date}, {breakfast_text}, "
-            f"payment by {payment_method}. Confirm?"
+            f"Here's your booking summary:\n"
+            f"Name: {guest_name}\n"
+            f"Email: {email}\n"
+            f"Phone: {phone}\n"
+            f"Check-in: {checkin_date}\n"
+            f"Check-out: {checkout_date}\n"
+            f"Guests: {num_guests}\n"
+            f"Room: {room_type}\n"
+            f"Special Requests: {special_requests}\n"
+            f"Breakfast: {breakfast_text}\n"
+            f"Payment: {payment_method}\n"
+            f"\nDoes everything look correct? (yes/no)"
         )
         
         dispatcher.utter_message(text=summary)
@@ -84,6 +99,43 @@ class ValidateBookingForm(FormValidationAction):
             return {"guest_name": None}
         
         return {"guest_name": slot_value.strip().title()}
+
+    def validate_email(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        """Validate email address"""
+        
+        # Simple email validation pattern
+        email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+        
+        if not slot_value or not re.match(email_pattern, slot_value):
+            dispatcher.utter_message(text="Please provide a valid email address (e.g., name@example.com).")
+            return {"email": None}
+        
+        return {"email": slot_value.lower().strip()}
+
+    def validate_phone(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        """Validate phone number"""
+        
+        # Remove common formatting characters
+        cleaned_phone = re.sub(r'[\s\-\(\)\.]', '', str(slot_value))
+        
+        # Check if it contains at least 7 digits and max 15 digits (international format)
+        if not re.match(r'^[\+]?[0-9]{7,15}$', cleaned_phone):
+            dispatcher.utter_message(text="Please provide a valid phone number (at least 7 digits).")
+            return {"phone": None}
+        
+        return {"phone": slot_value.strip()}
 
     def validate_checkin_date(
         self,
@@ -197,6 +249,32 @@ class ValidateBookingForm(FormValidationAction):
         )
         return {"room_type": None}
 
+    def validate_special_requests(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        """Validate special requests"""
+        
+        # Special requests can be anything, just check if it's not too long
+        if not slot_value:
+            return {"special_requests": "None"}
+        
+        slot_lower = str(slot_value).lower().strip()
+        
+        # If user says none, nothing, no, etc.
+        if slot_lower in ['none', 'nothing', 'no', 'nope', 'n/a', 'na', 'no special requests', 'nothing special']:
+            return {"special_requests": "None"}
+        
+        # Limit length to avoid spam
+        if len(slot_value) > 200:
+            dispatcher.utter_message(text="Please keep special requests under 200 characters.")
+            return {"special_requests": None}
+        
+        return {"special_requests": slot_value.strip().capitalize()}
+
     def validate_breakfast(
         self,
         slot_value: Any,
@@ -250,10 +328,13 @@ class ActionConfirmBooking(Action):
         
         # Get all slot values
         guest_name = tracker.get_slot("guest_name")
+        email = tracker.get_slot("email")
+        phone = tracker.get_slot("phone")
         checkin_date = tracker.get_slot("checkin_date")
         checkout_date = tracker.get_slot("checkout_date")
         num_guests = tracker.get_slot("num_guests")
         room_type = tracker.get_slot("room_type")
+        special_requests = tracker.get_slot("special_requests")
         breakfast = tracker.get_slot("breakfast")
         payment_method = tracker.get_slot("payment_method")
         
@@ -264,10 +345,13 @@ class ActionConfirmBooking(Action):
             f"BOOKING CONFIRMATION - {timestamp}\n"
             f"{'='*60}\n"
             f"Guest Name: {guest_name}\n"
+            f"Email: {email}\n"
+            f"Phone: {phone}\n"
             f"Check-in Date: {checkin_date}\n"
             f"Check-out Date: {checkout_date}\n"
             f"Number of Guests: {num_guests}\n"
             f"Room Type: {room_type}\n"
+            f"Special Requests: {special_requests}\n"
             f"Breakfast: {breakfast}\n"
             f"Payment Method: {payment_method}\n"
             f"{'='*60}\n"

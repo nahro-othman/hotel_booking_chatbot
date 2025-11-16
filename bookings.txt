@@ -1,0 +1,27 @@
+
+============================================================
+BOOKING CONFIRMATION - 2025-11-16 21:21:50
+============================================================
+Guest Name: Nahro
+Check-in Date: 10th october
+Check-out Date: 10th october
+Number of Guests: 10
+Room Type: Single
+Breakfast: Yes
+Payment Method: Cash
+============================================================
+
+============================================================
+BOOKING CONFIRMATION - 2025-11-16 21:31:26
+============================================================
+Guest Name: Nahro
+Email: nahro@as0.com
+Phone: 00983034
+Check-in Date: 10th october
+Check-out Date: 12th october
+Number of Guests: 10
+Room Type: Double
+Special Requests: Er
+Breakfast: Yes
+Payment Method: Cash
+============================================================

@@ -38,6 +38,42 @@ nlu:
       - [Daniel](name)
       - [Karen](name)
 
+  - intent: provide_email
+    examples: |
+      - [john@email.com](email)
+      - My email is [sarah.smith@gmail.com](email)
+      - It's [mike123@yahoo.com](email)
+      - [contact@example.com](email)
+      - [user.name@domain.com](email)
+      - [test@test.com](email)
+      - [info@company.com](email)
+      - [hello@world.org](email)
+      - [name123@email.co.uk](email)
+      - [myemail@service.net](email)
+      - [booking@hotel.com](email)
+      - [customer@business.io](email)
+      - [personal.mail@provider.com](email)
+      - [work.email@office.com](email)
+      - [admin@site.com](email)
+
+  - intent: provide_phone
+    examples: |
+      - [123-456-7890](phone)
+      - My phone is [555-0123](phone)
+      - [+1234567890](phone)
+      - [001-555-1234](phone)
+      - [(555) 123-4567](phone)
+      - [5551234567](phone)
+      - [+44 20 1234 5678](phone)
+      - [555.123.4567](phone)
+      - [1234567890](phone)
+      - [+49 123 456789](phone)
+      - [555 123 4567](phone)
+      - [123 456 7890](phone)
+      - [+1-555-123-4567](phone)
+      - [0123456789](phone)
+      - [555-0199](phone)
+
   - intent: provide_checkin_date
     examples: |
       - [10th November](checkin_date)
@@ -118,6 +154,29 @@ nlu:
       - I prefer the [suite](room_type)
       - Give me a [deluxe](room_type) room
       - [Suite](room_type) room
+
+  - intent: provide_special_requests
+    examples: |
+      - [High floor please](special_requests)
+      - [Quiet room](special_requests)
+      - [None](special_requests)
+      - No special requests
+      - Nothing special
+      - I'd like a [room with a view](special_requests)
+      - [Early check-in if possible](special_requests)
+      - [Late checkout](special_requests)
+      - [Non-smoking room](special_requests)
+      - [Room away from elevator](special_requests)
+      - [Ground floor](special_requests)
+      - [King size bed](special_requests)
+      - [Extra pillows](special_requests)
+      - [Accessible room](special_requests)
+      - [Connecting rooms](special_requests)
+      - [Baby crib needed](special_requests)
+      - [Hypoallergenic bedding](special_requests)
+      - Just a [quiet area](special_requests)
+      - [No special requirements](special_requests)
+      - Nothing particular
 
   - intent: provide_breakfast
     examples: |
