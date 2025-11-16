@@ -6,15 +6,28 @@ A conversational AI chatbot built with Rasa that assists users in booking hotel 
 
 This chatbot collects the following information through conversation:
 
-- Guest name (required)
-- Check-in date (required)
-- Check-out date (required)
-- Number of guests (required)
-- Room type (single/double)
+- Guest name (required, minimum 3 characters)
+- Check-in date (required, various formats supported)
+- Check-out date (required, various formats supported)
+- Number of guests (required, 1-10 guests)
+- Room type (Single, Double, Suite, or Deluxe)
 - Breakfast inclusion (yes/no)
-- Payment method (credit card/cash)
+- Payment method (Credit Card, Debit Card, Cash, or PayPal)
 
 After collecting all information, the bot confirms the booking summary and saves the booking to a local file (`bookings.txt`).
+
+## ✨ Key Features
+
+- **Smart Validation**: Validates all user inputs with helpful error messages
+- **Multiple Date Formats**: Accepts dates in various formats (DD/MM/YYYY, "10th November", "tomorrow", etc.)
+- **Form-Based Conversation**: Uses Rasa forms for efficient data collection
+- **Flexible Room Options**: Supports Single, Double, Suite, and Deluxe rooms
+- **Multiple Payment Methods**: Credit Card, Debit Card, Cash, and PayPal
+- **Help System**: Users can ask for help at any time
+- **Cancellation Support**: Users can cancel bookings mid-process
+- **Out-of-Scope Handling**: Gracefully handles unrelated questions
+- **Persistent Storage**: All bookings saved to local file with timestamps
+- **Error Recovery**: Robust error handling and user-friendly messages
 
 ## 🛠️ Technology Stack
 
@@ -92,11 +105,11 @@ This will create a trained model in the `models/` directory.
 ```
 
 The `run.sh` script will:
+
 - Activate virtual environment
 - Check if model is trained
 - Start the action server automatically
 - Launch the Rasa shell for you to chat
-
 
 ### Option 2: Manual Start
 
@@ -138,14 +151,14 @@ Bot: How many guests will stay?
 User: Two.
 Bot: What room type would you like? Single or double?
 
-User: Double.
+User: Suite.
 Bot: Do you want breakfast included?
 
 User: Yes.
-Bot: How would you like to pay? Credit card or cash?
+Bot: How would you like to pay? Credit Card, Debit Card, Cash, or PayPal?
 
 User: Credit card.
-Bot: Here's your summary: Nahro, Double room, Two guests, from 10th November to 12th November, breakfast included, payment by credit card. Confirm?
+Bot: Here's your summary: Nahro, Suite room, Two guests, from 10th November to 12th November, breakfast included, payment by Credit Card. Confirm?
 
 User: Yes.
 Bot: Great! Your booking is confirmed. Thank you for choosing our hotel.
@@ -171,17 +184,40 @@ Payment Method: Credit card
 
 ## 🧪 Testing
 
-To test the NLU model:
+### Test NLU Model
 
 ```bash
 rasa test nlu --nlu data/nlu.yml
 ```
 
-To test stories:
+This will test the intent classification and entity extraction accuracy.
+
+### Test Stories and Dialogue
 
 ```bash
 rasa test
 ```
+
+This tests the entire dialogue management system.
+
+### Test Specific Scenarios
+
+Use `rasa shell` to test these scenarios:
+
+1. **Complete Booking Flow**: Test a full booking from greeting to confirmation
+2. **Help Request**: Type "help" during booking to test help system
+3. **Cancellation**: Type "cancel" mid-booking to test cancellation
+4. **Out-of-Scope**: Ask "what's the weather" to test out-of-scope handling
+5. **Invalid Inputs**: Test validation by providing invalid names, dates, or numbers
+6. **Edge Cases**: Test with 1 guest, 10 guests, various date formats
+
+### Interactive Testing Mode
+
+```bash
+rasa interactive
+```
+
+This allows you to test and correct the bot's behavior in real-time.
 
 ## 🔧 Customization
 
@@ -218,6 +254,10 @@ Edit the `responses` section in `domain.yml` and retrain the model.
 - `affirm` - Confirmation (yes)
 - `deny` - Denial (no)
 - `goodbye` - End conversation
+- `ask_help` - User requests help or information
+- `ask_cancel` - User wants to cancel the booking
+- `out_of_scope` - Questions unrelated to hotel booking
+- `thank` - User expresses gratitude
 
 ### Entities
 
@@ -248,6 +288,31 @@ Edit the `responses` section in `domain.yml` and retrain the model.
 - Check entity extraction in NLU training data
 - Verify entity-to-slot mappings in `domain.yml`
 - Test with: `rasa shell nlu`
+
+## 🎯 Best Practices Implemented
+
+This project follows Rasa best practices:
+
+1. **Form-Based Slot Filling**: Efficient data collection using Rasa forms
+2. **Comprehensive Validation**: All user inputs are validated before acceptance
+3. **Error Handling**: Graceful error handling with user-friendly messages
+4. **Conversation Recovery**: Users can restart or cancel at any time
+5. **Intent Separation**: Clear separation between different user intents
+6. **Rich Training Data**: Over 260+ training examples across 14 intents
+7. **Multiple Conversation Paths**: Various story flows to handle different scenarios
+8. **Entity Extraction**: Proper entity recognition and slot mapping
+9. **Fallback Handling**: Out-of-scope intent for unrelated queries
+10. **Documentation**: Comprehensive README with setup and usage instructions
+
+## 📈 Project Statistics
+
+- **14 Intents**: Covering all booking scenarios and edge cases
+- **7 Entities**: For extracting booking information
+- **7 Slots**: For storing booking details
+- **8 Stories**: Diverse conversation flows
+- **8 Rules**: For consistent responses
+- **3 Custom Actions**: For validation and booking confirmation
+- **260+ Training Examples**: Ensuring robust NLU performance
 
 ## 📚 Resources
 

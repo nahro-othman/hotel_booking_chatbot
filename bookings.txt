@@ -34,3 +34,39 @@ Room Type: Double
 Breakfast: Yes
 Payment Method: Cash
 ============================================================
+
+============================================================
+BOOKING CONFIRMATION - 2025-11-16 13:33:57
+============================================================
+Guest Name: I Want To Buy A Car
+Check-in Date: 12 november
+Check-out Date: 10 november
+Number of Guests: 10
+Room Type: Single
+Breakfast: Yes
+Payment Method: Cash
+============================================================
+
+============================================================
+BOOKING CONFIRMATION - 2025-11-16 13:40:26
+============================================================
+Guest Name: Nahro
+Check-in Date: 10th october
+Check-out Date: 10th october
+Number of Guests: 10
+Room Type: Single
+Breakfast: Yes
+Payment Method: Paypal
+============================================================
+
+============================================================
+BOOKING CONFIRMATION - 2025-11-16 13:44:16
+============================================================
+Guest Name: I Am A Dog
+Check-in Date: 10th November
+Check-out Date: 12th december
+Number of Guests: 10
+Room Type: Single
+Breakfast: No
+Payment Method: Paypal
+============================================================

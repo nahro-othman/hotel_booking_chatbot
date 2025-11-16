@@ -1,32 +1,51 @@
 version: "3.1"
 
 stories:
-- story: complete hotel booking flow with form
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - action: booking_form
-  - active_loop: booking_form
-  - active_loop: null
-  - action: action_show_booking_summary
-  - intent: affirm
-  - action: action_confirm_booking
-  - action: utter_confirm_booking
+  - story: complete hotel booking flow with form
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - action: booking_form
+      - active_loop: booking_form
+      - active_loop: null
+      - action: action_show_booking_summary
+      - intent: affirm
+      - action: action_confirm_booking
+      - action: utter_confirm_booking
 
-- story: booking with denial after summary
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - action: booking_form
-  - active_loop: booking_form
-  - active_loop: null
-  - action: action_show_booking_summary
-  - intent: deny
-  - action: utter_booking_cancelled
-  - action: booking_form
-  - active_loop: booking_form
+  - story: booking with denial after summary
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - action: booking_form
+      - active_loop: booking_form
+      - active_loop: null
+      - action: action_show_booking_summary
+      - intent: deny
+      - action: utter_booking_cancelled
+      - action: booking_form
+      - active_loop: booking_form
 
-- story: simple goodbye
-  steps:
-  - intent: goodbye
-  - action: utter_goodbye
+  - story: simple goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: user thanks after booking
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - action: booking_form
+      - active_loop: booking_form
+      - active_loop: null
+      - action: action_show_booking_summary
+      - intent: affirm
+      - action: action_confirm_booking
+      - action: utter_confirm_booking
+      - intent: thank
+      - action: utter_thanks
+
+  - story: user asks out of scope question first
+    steps:
+      - intent: out_of_scope
+      - action: utter_out_of_scope

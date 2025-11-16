@@ -1,30 +1,32 @@
-# Rasa
-models/
-.rasa/
-
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual Environments
 venv/
+.venv/
 env/
 ENV/
-.venv
 
-# Rasa specific
+# Rasa
+models/*.tar.gz
+.rasa/
 results/
-*.tar.gz
 *.db
 *.db-shm
 *.db-wal
 
-# Training logs
-training_logs/
-
-# Bookings (comment out if you want to track bookings)
-# bookings.txt
+# Logs
+*.log
+action_server.log
+rasa_*.log
 
 # IDE
 .vscode/
@@ -32,21 +34,17 @@ training_logs/
 *.swp
 *.swo
 *~
-
-# OS
 .DS_Store
-Thumbs.db
 
-# Logs
-*.log
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
 
-# Process IDs
-.pids
+# Bookings (optional - uncomment if you don't want to track bookings)
+# bookings.txt
 
-# Web UI (removed)
-web_ui/
-start_all.sh
-stop_all.sh
-
-# Old subdirectory
-hotel_booking_bot/
+# Temporary files
+*.tmp
+*.bak
+.ipynb_checkpoints/

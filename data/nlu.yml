@@ -1,194 +1,270 @@
 version: "3.1"
 
 nlu:
-- intent: greet
-  examples: |
-    - hey
-    - hello
-    - hi
-    - hello there
-    - good morning
-    - good evening
-    - hey there
-    - hi there
-    - greetings
-    - hey bot
-    - hello bot
+  - intent: greet
+    examples: |
+      - hey
+      - hello
+      - hi
+      - hello there
+      - good morning
+      - good evening
+      - hey there
+      - hi there
+      - greetings
+      - hey bot
+      - hello bot
 
-- intent: provide_name
-  examples: |
-    - My name is [Nahro](name)
-    - I'm [John](name)
-    - [Sarah](name)
-    - It's [Michael](name)
-    - Call me [Emma](name)
-    - [David](name) is my name
-    - I am [Lisa](name)
-    - My name's [Tom](name)
-    - [Anna](name)
-    - [Peter](name)
-    - [Maria](name)
-    - [James](name)
-    - I'm [Robert](name)
-    - [Jennifer](name)
-    - [William](name)
-    - The name is [Elizabeth](name)
-    - [Christopher](name)
-    - [Jessica](name)
-    - [Daniel](name)
-    - [Karen](name)
+  - intent: provide_name
+    examples: |
+      - My name is [Nahro](name)
+      - I'm [John](name)
+      - [Sarah](name)
+      - It's [Michael](name)
+      - Call me [Emma](name)
+      - [David](name) is my name
+      - I am [Lisa](name)
+      - My name's [Tom](name)
+      - [Anna](name)
+      - [Peter](name)
+      - [Maria](name)
+      - [James](name)
+      - I'm [Robert](name)
+      - [Jennifer](name)
+      - [William](name)
+      - The name is [Elizabeth](name)
+      - [Christopher](name)
+      - [Jessica](name)
+      - [Daniel](name)
+      - [Karen](name)
 
-- intent: provide_checkin_date
-  examples: |
-    - [10th November](checkin_date)
-    - [November 10](checkin_date)
-    - [10/11/2024](checkin_date)
-    - [tomorrow](checkin_date)
-    - [next Monday](checkin_date)
-    - [15th December](checkin_date)
-    - [December 25](checkin_date)
-    - [01/05/2024](checkin_date)
-    - [today](checkin_date)
-    - [next week](checkin_date)
-    - [5th January](checkin_date)
-    - [January 20](checkin_date)
-    - [12/15/2024](checkin_date)
-    - [the 20th](checkin_date)
-    - [March 3rd](checkin_date)
+  - intent: provide_checkin_date
+    examples: |
+      - [10th November](checkin_date)
+      - [November 10](checkin_date)
+      - [10/11/2024](checkin_date)
+      - [tomorrow](checkin_date)
+      - [next Monday](checkin_date)
+      - [15th December](checkin_date)
+      - [December 25](checkin_date)
+      - [01/05/2024](checkin_date)
+      - [today](checkin_date)
+      - [next week](checkin_date)
+      - [5th January](checkin_date)
+      - [January 20](checkin_date)
+      - [12/15/2024](checkin_date)
+      - [the 20th](checkin_date)
+      - [March 3rd](checkin_date)
 
-- intent: provide_checkout_date
-  examples: |
-    - [12th November](checkout_date)
-    - [November 12](checkout_date)
-    - [12/11/2024](checkout_date)
-    - [in two days](checkout_date)
-    - [next Friday](checkout_date)
-    - [20th December](checkout_date)
-    - [December 28](checkout_date)
-    - [05/05/2024](checkout_date)
-    - [day after tomorrow](checkout_date)
-    - [in 3 days](checkout_date)
-    - [10th January](checkout_date)
-    - [January 25](checkout_date)
-    - [12/20/2024](checkout_date)
-    - [the 25th](checkout_date)
-    - [March 10th](checkout_date)
+  - intent: provide_checkout_date
+    examples: |
+      - [12th November](checkout_date)
+      - [November 12](checkout_date)
+      - [12/11/2024](checkout_date)
+      - [in two days](checkout_date)
+      - [next Friday](checkout_date)
+      - [20th December](checkout_date)
+      - [December 28](checkout_date)
+      - [05/05/2024](checkout_date)
+      - [day after tomorrow](checkout_date)
+      - [in 3 days](checkout_date)
+      - [10th January](checkout_date)
+      - [January 25](checkout_date)
+      - [12/20/2024](checkout_date)
+      - [the 25th](checkout_date)
+      - [March 10th](checkout_date)
 
-- intent: provide_num_guests
-  examples: |
-    - [Two](num_guests)
-    - [2](num_guests) guests
-    - [One](num_guests)
-    - [1](num_guests)
-    - [Three](num_guests) people
-    - [3](num_guests)
-    - [Four](num_guests)
-    - [4](num_guests) guests
-    - [Five](num_guests)
-    - Just [one](num_guests)
-    - [Two](num_guests) people
-    - There will be [3](num_guests)
-    - [2](num_guests)
-    - [1](num_guests) person
-    - [Four](num_guests) guests
+  - intent: provide_num_guests
+    examples: |
+      - [Two](num_guests)
+      - [2](num_guests) guests
+      - [One](num_guests)
+      - [1](num_guests)
+      - [Three](num_guests) people
+      - [3](num_guests)
+      - [Four](num_guests)
+      - [4](num_guests) guests
+      - [Five](num_guests)
+      - Just [one](num_guests)
+      - [Two](num_guests) people
+      - There will be [3](num_guests)
+      - [2](num_guests)
+      - [1](num_guests) person
+      - [Four](num_guests) guests
 
-- intent: provide_room_type
-  examples: |
-    - [Double](room_type)
-    - [Single](room_type)
-    - I want a [double](room_type) room
-    - [Single](room_type) room please
-    - A [double](room_type)
-    - [Double](room_type) bed
-    - [Single](room_type) bed
-    - I prefer [double](room_type)
-    - [Single](room_type) please
-    - Give me a [double](room_type) room
-    - [Double](room_type) room
-    - A [single](room_type) one
-    - [Double](room_type) would be great
-    - I'll take a [single](room_type)
-    - [Double](room_type) for me
+  - intent: provide_room_type
+    examples: |
+      - [Double](room_type)
+      - [Single](room_type)
+      - I want a [double](room_type) room
+      - [Single](room_type) room please
+      - A [double](room_type)
+      - [Double](room_type) bed
+      - [Single](room_type) bed
+      - I prefer [double](room_type)
+      - [Single](room_type) please
+      - Give me a [double](room_type) room
+      - [Double](room_type) room
+      - A [single](room_type) one
+      - [Double](room_type) would be great
+      - I'll take a [single](room_type)
+      - [Double](room_type) for me
+      - [Suite](room_type)
+      - [Deluxe](room_type)
+      - I want a [suite](room_type)
+      - [Deluxe](room_type) room please
+      - A [suite](room_type) would be nice
+      - [Deluxe](room_type) suite
+      - I prefer the [suite](room_type)
+      - Give me a [deluxe](room_type) room
+      - [Suite](room_type) room
 
-- intent: provide_breakfast
-  examples: |
-    - [Yes](breakfast)
-    - [No](breakfast)
-    - [Yes](breakfast) please
-    - [No](breakfast) thanks
-    - Sure, [yes](breakfast)
-    - [No](breakfast) thank you
-    - [Yes](breakfast), I want breakfast
-    - [No](breakfast), I don't want breakfast
-    - [Yes](breakfast), include it
-    - [No](breakfast), skip it
-    - [Yes](breakfast) I would like breakfast
-    - [No](breakfast) breakfast
-    - With breakfast, [yes](breakfast)
-    - Without breakfast, [no](breakfast)
-    - [Yes](breakfast), add breakfast
+  - intent: provide_breakfast
+    examples: |
+      - [Yes](breakfast)
+      - [No](breakfast)
+      - [Yes](breakfast) please
+      - [No](breakfast) thanks
+      - Sure, [yes](breakfast)
+      - [No](breakfast) thank you
+      - [Yes](breakfast), I want breakfast
+      - [No](breakfast), I don't want breakfast
+      - [Yes](breakfast), include it
+      - [No](breakfast), skip it
+      - [Yes](breakfast) I would like breakfast
+      - [No](breakfast) breakfast
+      - With breakfast, [yes](breakfast)
+      - Without breakfast, [no](breakfast)
+      - [Yes](breakfast), add breakfast
 
-- intent: provide_payment_method
-  examples: |
-    - [Credit card](payment_method)
-    - [Cash](payment_method)
-    - By [credit card](payment_method)
-    - I'll pay with [cash](payment_method)
-    - [Credit card](payment_method) please
-    - [Cash](payment_method) payment
-    - Pay by [credit card](payment_method)
-    - [Cash](payment_method) please
-    - Using [credit card](payment_method)
-    - I prefer [cash](payment_method)
-    - [Credit card](payment_method) payment
-    - With [cash](payment_method)
-    - [Card](payment_method)
-    - [Credit](payment_method)
-    - I'll use my [card](payment_method)
+  - intent: provide_payment_method
+    examples: |
+      - [Credit card](payment_method)
+      - [Cash](payment_method)
+      - By [credit card](payment_method)
+      - I'll pay with [cash](payment_method)
+      - [Credit card](payment_method) please
+      - [Cash](payment_method) payment
+      - Pay by [credit card](payment_method)
+      - [Cash](payment_method) please
+      - Using [credit card](payment_method)
+      - I prefer [cash](payment_method)
+      - [Credit card](payment_method) payment
+      - With [cash](payment_method)
+      - [Card](payment_method)
+      - [Credit](payment_method)
+      - I'll use my [card](payment_method)
+      - [Debit card](payment_method)
+      - [PayPal](payment_method)
+      - I'll pay with [debit card](payment_method)
+      - [PayPal](payment_method) payment
+      - Using [PayPal](payment_method)
+      - Pay with [debit card](payment_method)
+      - [Debit](payment_method)
+      - I prefer [PayPal](payment_method)
 
-- intent: affirm
-  examples: |
-    - yes
-    - yes please
-    - yep
-    - yeah
-    - sure
-    - of course
-    - that sounds good
-    - correct
-    - right
-    - affirmative
-    - confirm
-    - ok
-    - okay
-    - absolutely
-    - indeed
+  - intent: affirm
+    examples: |
+      - yes
+      - yes please
+      - yep
+      - yeah
+      - sure
+      - of course
+      - that sounds good
+      - correct
+      - right
+      - affirmative
+      - confirm
+      - confirmed
+      - ok
+      - okay
+      - absolutely
+      - indeed
+      - proceed
+      - go ahead
+      - book it
 
-- intent: deny
-  examples: |
-    - no
-    - no thanks
-    - nope
-    - not really
-    - no way
-    - I don't think so
-    - incorrect
-    - wrong
-    - cancel
-    - never mind
-    - not correct
-    - negative
-    - nah
+  - intent: deny
+    examples: |
+      - no
+      - no thanks
+      - nope
+      - not really
+      - no way
+      - I don't think so
+      - incorrect
+      - wrong
+      - not correct
+      - negative
+      - nah
 
-- intent: goodbye
-  examples: |
-    - bye
-    - goodbye
-    - see you
-    - see you later
-    - talk to you later
-    - have a nice day
-    - catch you later
-    - bye bye
-    - take care
-    - farewell
+  - intent: goodbye
+    examples: |
+      - bye
+      - goodbye
+      - see you
+      - see you later
+      - talk to you later
+      - have a nice day
+      - catch you later
+      - bye bye
+      - take care
+      - farewell
+
+  - intent: ask_help
+    examples: |
+      - help
+      - help me
+      - can you help
+      - what can you do
+      - how does this work
+      - I need help
+      - assist me
+      - what are my options
+      - what do I need to provide
+      - tell me what you can do
+      - how do I book a room
+
+  - intent: ask_cancel
+    examples: |
+      - cancel
+      - cancel booking
+      - I want to cancel
+      - cancel this
+      - stop the booking
+      - I changed my mind
+      - nevermind
+      - forget it
+      - don't book
+      - cancel reservation
+
+  - intent: out_of_scope
+    examples: |
+      - what's the weather
+      - tell me a joke
+      - order pizza
+      - how are you
+      - what's your favorite color
+      - sing a song
+      - do you like movies
+      - who won the game
+      - what time is it
+      - where are you from
+      - tell me about yourself
+      - can you cook
+      - what's 2+2
+      - recommend a restaurant
+
+  - intent: thank
+    examples: |
+      - thanks
+      - thank you
+      - thanks a lot
+      - thank you so much
+      - thanks for your help
+      - appreciate it
+      - much appreciated
+      - thanks!
+      - ty
+      - thx

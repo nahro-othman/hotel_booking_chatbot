@@ -65,7 +65,25 @@ class ValidateBookingForm(FormValidationAction):
             dispatcher.utter_message(text="Please provide a valid name (letters only).")
             return {"guest_name": None}
         
-        return {"guest_name": slot_value.strip()}
+        # Require at least 3 characters for better quality
+        if len(slot_value.strip()) < 3:
+            dispatcher.utter_message(text="Please provide a full name (at least 3 characters).")
+            return {"guest_name": None}
+        
+        # Reject names that are too long or have too many words (likely not real names)
+        words = slot_value.strip().split()
+        if len(words) > 4:
+            dispatcher.utter_message(text="Please provide your actual name (first and last name).")
+            return {"guest_name": None}
+        
+        # Reject if contains common non-name phrases
+        slot_lower = slot_value.lower()
+        invalid_phrases = ['want', 'need', 'book', 'room', 'hotel', 'reservation']
+        if any(phrase in slot_lower for phrase in invalid_phrases):
+            dispatcher.utter_message(text="Please provide your actual name, not a request.")
+            return {"guest_name": None}
+        
+        return {"guest_name": slot_value.strip().title()}
 
     def validate_checkin_date(
         self,
@@ -81,6 +99,7 @@ class ValidateBookingForm(FormValidationAction):
             r'\d{1,2}[/-]\d{1,2}[/-]\d{4}',  # 10/11/2024 or 10-11-2024
             r'\d{1,2}(st|nd|rd|th)?\s+(january|february|march|april|may|june|july|august|september|october|november|december)',  # 10th November
             r'(january|february|march|april|may|june|july|august|september|october|november|december)\s+\d{1,2}',  # November 10
+            r'(today|tomorrow|next\s+\w+)',  # today, tomorrow, next week/month
         ]
         
         slot_value_lower = str(slot_value).lower()
@@ -89,7 +108,7 @@ class ValidateBookingForm(FormValidationAction):
             if re.search(pattern, slot_value_lower):
                 return {"checkin_date": slot_value}
         
-        dispatcher.utter_message(text="Please provide a valid date (e.g., 10/11/2024 or 10th November).")
+        dispatcher.utter_message(text="Please provide a valid date (e.g., 10/11/2024, 10th November, or tomorrow).")
         return {"checkin_date": None}
 
     def validate_checkout_date(
@@ -106,6 +125,7 @@ class ValidateBookingForm(FormValidationAction):
             r'\d{1,2}[/-]\d{1,2}[/-]\d{4}',
             r'\d{1,2}(st|nd|rd|th)?\s+(january|february|march|april|may|june|july|august|september|october|november|december)',
             r'(january|february|march|april|may|june|july|august|september|october|november|december)\s+\d{1,2}',
+            r'(in\s+\d+\s+days?|day\s+after\s+tomorrow|next\s+\w+)',  # in 3 days, day after tomorrow
         ]
         
         slot_value_lower = str(slot_value).lower()
@@ -114,7 +134,7 @@ class ValidateBookingForm(FormValidationAction):
             if re.search(pattern, slot_value_lower):
                 return {"checkout_date": slot_value}
         
-        dispatcher.utter_message(text="Please provide a valid date (e.g., 12/11/2024 or 12th November).")
+        dispatcher.utter_message(text="Please provide a valid date (e.g., 12/11/2024, 12th November, or in 3 days).")
         return {"checkout_date": None}
 
     def validate_num_guests(
@@ -132,14 +152,18 @@ class ValidateBookingForm(FormValidationAction):
         if not numbers:
             # Check for word numbers
             word_to_num = {
-                'one': '1', 'two': '2', 'three': '3', 'four': '4', 
-                'five': '5', 'six': '6', 'seven': '7', 'eight': '8'
+                'one': 1, 'two': 2, 'three': 3, 'four': 4, 
+                'five': 5, 'six': 6, 'seven': 7, 'eight': 8,
+                'nine': 9, 'ten': 10
             }
             
             slot_lower = str(slot_value).lower()
             for word, num in word_to_num.items():
                 if word in slot_lower:
-                    return {"num_guests": num}
+                    if num < 1 or num > 10:
+                        dispatcher.utter_message(text="Please provide a number between 1 and 10 guests.")
+                        return {"num_guests": None}
+                    return {"num_guests": str(num)}
             
             dispatcher.utter_message(text="Please provide a valid number of guests (e.g., 2 or two).")
             return {"num_guests": None}
@@ -254,8 +278,9 @@ class ActionConfirmBooking(Action):
             bookings_file = "bookings.txt"
             with open(bookings_file, "a", encoding="utf-8") as f:
                 f.write(booking_record)
-            print(f"Booking saved to {bookings_file}")
+            print(f"✅ Booking saved successfully to {bookings_file}")
         except Exception as e:
-            print(f"Error saving booking: {e}")
+            print(f"❌ Error saving booking: {e}")
+            dispatcher.utter_message(text="Warning: There was an issue saving your booking details, but your booking is confirmed!")
         
         return []
